@@ -1,0 +1,180 @@
+@import "@fontsource/noto-sans/400.css";
+@import "@fontsource/noto-sans/500.css";
+@import "@fontsource/noto-sans/600.css";
+@import "tailwindcss";
+
+/*
+  Design tokens - MoSPI / NSSTA AI Competency Diagnostics
+  Source: locked design-system spec (statistical-navy register).
+  Spacing scale is intentionally NOT overridden here: Tailwind's default
+  spacing primitive (0.25rem = 4px) already produces the spec's
+  4/8/12/16/24/32/48/64/96 scale via p-1, p-2, p-3, p-4, p-6, p-8, p-12,
+  p-16, p-24 - no custom tokens needed.
+*/
+@theme {
+  /* Brand */
+  --color-primary: #0b3a5c;
+  --color-primary-hover: #092e49;
+  --color-primary-tint: #e4ebf1;
+  --color-secondary: #45607a;
+  --color-accent: #a66a00;
+  --color-accent-tint: #f5ebd8;
+
+  /* Neutrals */
+  --color-bg: #f6f7f9;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f0f2f5;
+  --color-border: #d9dfe5;
+  --color-border-strong: #b7c0c9;
+  --color-text-primary: #17232e;
+  --color-text-secondary: #56636e;
+  --color-text-muted: #8592a0;
+
+  /* Semantic: competency levels (never color-only in usage - pair with a label) */
+  --color-strong: #1f7a5c;
+  --color-strong-tint: #e1f1ea;
+  --color-moderate: #c98a1b;
+  --color-moderate-tint: #fbf0dc;
+  --color-weak: #b3452c;
+  --color-weak-tint: #f7e4dd;
+  --color-insufficient: #8c97a3;
+  --color-insufficient-tint: #edeff1;
+
+  /* System (kept distinct from competency-weak on purpose) */
+  --color-system-error: #c0392b;
+  --color-focus-ring: #a66a00;
+
+  /* Type: Noto Sans only for this mock (bilingual-ready stack kept for production) */
+  --font-sans:
+    'Noto Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --text-title: 1.75rem; /* 28px, page/report titles */
+  --text-title--line-height: 2.125rem;
+
+  --text-h1: 1.375rem; /* 22px, section titles */
+  --text-h1--line-height: 1.875rem;
+
+  --text-h2: 1.0625rem; /* 17px, card/panel titles */
+  --text-h2--line-height: 1.5rem;
+
+  --text-h3: 0.8125rem; /* 13px, table/chart headers */
+  --text-h3--line-height: 1.125rem;
+
+  --text-body: 0.875rem; /* 14px, default body */
+  --text-body--line-height: 1.375rem;
+
+  --text-caption: 0.78125rem; /* 12.5px, footnotes/sources */
+  --text-caption--line-height: 1.125rem;
+
+  --text-metric: 1.75rem; /* 28px, big number */
+  --text-metric--line-height: 2rem;
+
+  --text-cell: 0.8125rem; /* 13px, table data value */
+  --text-cell--line-height: 1.125rem;
+
+  --text-micro: 0.6875rem; /* 11px, axis/legend labels */
+  --text-micro--line-height: 0.875rem;
+
+  /* Radius: one system default + one documented exception (rounded-none, built in) */
+  --radius-sm: 4px;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-tint);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color-border-strong);
+    border-radius: 999px;
+    border: 2px solid var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-secondary);
+  }
+
+  html {
+    scrollbar-color: var(--color-border-strong) var(--color-bg);
+  }
+}
+
+/* Single, restrained entrance moment for the landing hero. No-op under reduced motion. */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-rise {
+    animation: hero-rise 0.5s ease-out both;
+  }
+}
+
+/* Faint statistical-grid texture: an authored SVG dot field, not a gradient wash. */
+.grid-texture {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ccircle cx='1.5' cy='1.5' r='1.5' fill='%230b3a5c' fill-opacity='0.06'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+/* Soft, brand-tinted lift for interactive cards - only appears on hover, real elevation feedback. */
+.card-lift {
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    border-color 0.2s ease-out;
+}
+
+.card-lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px -14px rgba(11, 58, 92, 0.32);
+  border-color: var(--color-border-strong);
+}
+
+/* Live-status pulse, reserved for a genuine "this reflects real data" signal. No-op under reduced motion. */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .live-pulse {
+    animation: live-pulse 1.8s ease-in-out infinite;
+  }
+}
