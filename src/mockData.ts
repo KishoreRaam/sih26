@@ -1,17 +1,52 @@
 // All mock content for the demo lives here so copy can be edited
 // without touching component code. Nothing here calls a real API.
 
-export interface NavItem {
+export interface NavChildItem {
   id: string
   label: string
 }
 
-export const navItems: NavItem[] = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'diagnostics', label: 'Diagnostics' },
-  { id: 'officers', label: 'Officers' },
-  { id: 'reports', label: 'Reports' },
-  { id: 'settings', label: 'Settings' },
+export interface NavItem {
+  id: string
+  label: string
+  children?: NavChildItem[]
+}
+
+export interface NavGroup {
+  id: string
+  label: string
+  items: NavItem[]
+}
+
+export const navGroups: NavGroup[] = [
+  {
+    id: 'diagnostics-group',
+    label: 'Diagnostics',
+    items: [
+      { id: 'overview', label: 'Dashboard' },
+      {
+        id: 'diagnostics',
+        label: 'New Assessment',
+        children: [
+          { id: 'upload', label: 'Upload Material' },
+          { id: 'generate', label: 'Generate Questions' },
+          { id: 'quiz', label: 'Assessment' },
+          { id: 'dashboard', label: 'Competency Report' },
+          { id: 'recommendations', label: 'Recommendations' },
+        ],
+      },
+      { id: 'officers', label: 'Officers' },
+      { id: 'reports', label: 'Reports' },
+    ],
+  },
+  {
+    id: 'governance-group',
+    label: 'Quality & Governance',
+    items: [
+      { id: 'audit', label: 'Verification Audit' },
+      { id: 'settings', label: 'Settings' },
+    ],
+  },
 ]
 
 export const org = {
@@ -370,8 +405,8 @@ export const mockCourseCatalog: CourseRecommendation[] = [
 
 export const sectionCopy: Record<string, { title: string; subtitle: string }> = {
   overview: {
-    title: 'Overview',
-    subtitle: 'Start a new AI competency assessment for an NSSTA training cohort.',
+    title: 'Dashboard',
+    subtitle: 'Department-level competency progress across the organisation.',
   },
   officers: {
     title: 'Officers',
@@ -385,13 +420,19 @@ export const sectionCopy: Record<string, { title: string; subtitle: string }> = 
     title: 'Settings',
     subtitle: 'Your NSSTA account details.',
   },
+  audit: {
+    title: 'Verification Audit',
+    subtitle:
+      'Question-generation verification outcomes for this cohort, reviewable by source document and rejection reason.',
+  },
 }
 
 export const breadcrumbBySection: Record<string, string[]> = {
-  overview: ['Overview'],
+  overview: ['Dashboard'],
   officers: ['Officers'],
   reports: ['Reports'],
   settings: ['Settings'],
+  audit: ['Verification Audit'],
 }
 
 export function getOfficerAverage(officer: OfficerRow): number {

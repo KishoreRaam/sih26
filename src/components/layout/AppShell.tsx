@@ -5,11 +5,12 @@ import { TopBar } from './TopBar'
 interface AppShellProps {
   breadcrumb: string[]
   activeNavId: string
-  onNavSelect: (id: string) => void
+  activeChildId?: string
+  onNavSelect: (id: string, childId?: string) => void
   children: ReactNode
 }
 
-export function AppShell({ breadcrumb, activeNavId, onNavSelect, children }: AppShellProps) {
+export function AppShell({ breadcrumb, activeNavId, activeChildId, onNavSelect, children }: AppShellProps) {
   const [collapsed, setCollapsed] = useState(false)
 
   return (
@@ -18,6 +19,7 @@ export function AppShell({ breadcrumb, activeNavId, onNavSelect, children }: App
       <div className="flex min-h-0 flex-1">
         <LeftNav
           activeId={activeNavId}
+          activeChildId={activeChildId}
           collapsed={collapsed}
           onToggleCollapsed={() => setCollapsed((c) => !c)}
           onSelect={onNavSelect}

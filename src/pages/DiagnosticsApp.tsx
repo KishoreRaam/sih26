@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { AppShell } from '../components/layout/AppShell'
+import { AdminCohortOverview } from '../components/admin/AdminCohortOverview'
+import { RejectionAuditBoard } from '../components/admin/RejectionAuditBoard'
 import { DashboardScreen } from '../components/screens/DashboardScreen'
 import { GenerateScreen } from '../components/screens/GenerateScreen'
 import { OfficersScreen } from '../components/screens/OfficersScreen'
-import { OverviewScreen } from '../components/screens/OverviewScreen'
 import { QuizScreen } from '../components/screens/QuizScreen'
 import { RecommendationsScreen } from '../components/screens/RecommendationsScreen'
 import { ReportsScreen } from '../components/screens/ReportsScreen'
@@ -17,15 +18,23 @@ import {
   type Step,
 } from '../mockData'
 
-type Section = 'overview' | 'diagnostics' | 'officers' | 'reports' | 'settings'
+type Section = 'overview' | 'diagnostics' | 'officers' | 'reports' | 'settings' | 'audit'
 
 export function DiagnosticsApp() {
-  const [section, setSection] = useState<Section>('diagnostics')
+  const [section, setSection] = useState<Section>('overview')
   const [step, setStep] = useState<Step>('upload')
 
   const goToDiagnostics = (targetStep: Step) => {
     setSection('diagnostics')
     setStep(targetStep)
+  }
+
+  function handleNavSelect(id: string, childId?: string) {
+    if (id === 'diagnostics' && childId) {
+      goToDiagnostics(childId as Step)
+    } else {
+      setSection(id as Section)
+    }
   }
 
   const breadcrumb = section === 'diagnostics' ? breadcrumbByStep[step] : breadcrumbBySection[section]
@@ -37,23 +46,20 @@ export function DiagnosticsApp() {
     <AppShell
       breadcrumb={breadcrumb}
       activeNavId={section}
-      onNavSelect={(id) => setSection(id as Section)}
+      activeChildId={section === 'diagnostics' ? step : undefined}
+      onNavSelect={handleNavSelect}
     >
       <h1 className="text-title font-semibold text-text-primary">{title}</h1>
       <p className="mt-2 max-w-[65ch] text-body text-text-secondary">{subtitle}</p>
 
       <div className="mt-8">
-        {section === 'overview' && (
-          <OverviewScreen
-            onStart={() => goToDiagnostics('upload')}
-            onViewReport={() => goToDiagnostics('dashboard')}
-          />
-        )}
+        {section === 'overview' && <AdminCohortOverview />}
         {section === 'officers' && <OfficersScreen />}
         {section === 'reports' && (
           <ReportsScreen onViewReport={() => goToDiagnostics('dashboard')} />
         )}
         {section === 'settings' && <SettingsScreen />}
+        {section === 'audit' && <RejectionAuditBoard />}
 
         {section === 'diagnostics' && (
           <>
