@@ -10,10 +10,10 @@ interface TrendBarChartProps {
 
 export function TrendBarChart({ points, maxValue = 100 }: TrendBarChartProps) {
   return (
-    <div className="flex h-40 items-end gap-3">
+    <div className="flex h-40 gap-3">
       {points.map((point) => (
         <div key={point.label} className="flex flex-1 flex-col items-center gap-2">
-          <div className="flex h-full w-full items-end">
+          <div className="flex w-full flex-1 items-end">
             <div
               className="w-full rounded-t-sm bg-primary"
               style={{ height: `${Math.max(4, (point.value / maxValue) * 100)}%` }}
