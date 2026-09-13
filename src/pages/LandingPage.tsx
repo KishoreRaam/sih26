@@ -81,7 +81,7 @@ function LandingHeader() {
           <span className="text-h2 font-semibold">MoSPI · NSSTA</span>
         </Link>
         <Link
-          to="/app"
+          to="/login"
           className="rounded-sm border border-white/30 px-4 py-1.5 text-caption font-medium text-white transition-colors hover:bg-white/10"
         >
           Try the live demo
@@ -153,7 +153,7 @@ function HeroSection() {
               competency heatmap by officer, and targeted training, in minutes.
             </p>
             <Link
-              to="/app"
+              to="/login"
               className="mt-6 inline-flex items-center rounded-sm bg-primary px-5 py-2.5 text-body font-medium text-white transition-colors hover:bg-primary-hover"
             >
               Try the live demo
@@ -403,7 +403,7 @@ function FinalCtaSection() {
           The live demo runs entirely in this browser. No account, no setup.
         </p>
         <Link
-          to="/app"
+          to="/login"
           className="mt-6 inline-flex items-center rounded-sm bg-primary px-5 py-2.5 text-body font-medium text-white transition-colors hover:bg-primary-hover"
         >
           Try the live demo
