@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { CaretDown, CaretUp, WarningCircle } from '@phosphor-icons/react'
+import { CaretDown, CaretUp, CheckCircle, Sparkle, WarningCircle } from '@phosphor-icons/react'
+import type { Icon } from '@phosphor-icons/react'
 import { mockGeneration } from '../../mockData'
 
 type GenState = 'running' | 'done'
@@ -9,13 +10,26 @@ interface GenerateScreenProps {
   onComplete: () => void
 }
 
-function StatTile({ label, value, tone }: { label: string; value: number; tone: Tone }) {
+function StatTile({
+  label,
+  value,
+  tone,
+  icon: ItemIcon,
+}: {
+  label: string
+  value: number
+  tone: Tone
+  icon: Icon
+}) {
   const toneClass =
     tone === 'strong' ? 'text-strong' : tone === 'weak' ? 'text-weak' : 'text-text-primary'
   return (
-    <div className="rounded-sm border border-border bg-surface p-4">
-      <p className={`text-metric font-medium tabular-nums ${toneClass}`}>{value}</p>
-      <p className="mt-1 text-caption text-text-secondary">{label}</p>
+    <div className="card-lift rounded-sm border border-border bg-surface p-4">
+      <div className="flex items-center justify-between gap-2">
+        <p className="text-caption text-text-secondary">{label}</p>
+        <ItemIcon size={16} className={toneClass} />
+      </div>
+      <p className={`mt-2 text-metric font-medium tabular-nums ${toneClass}`}>{value}</p>
     </div>
   )
 }
@@ -45,9 +59,9 @@ export function GenerateScreen({ onComplete }: GenerateScreenProps) {
   return (
     <div className="max-w-2xl">
       <div className="grid grid-cols-3 gap-4">
-        <StatTile label="Generated" value={counts.generated} tone="neutral" />
-        <StatTile label="Verified" value={counts.verified} tone="strong" />
-        <StatTile label="Rejected" value={counts.rejected} tone="weak" />
+        <StatTile label="Generated" value={counts.generated} tone="neutral" icon={Sparkle} />
+        <StatTile label="Verified" value={counts.verified} tone="strong" icon={CheckCircle} />
+        <StatTile label="Rejected" value={counts.rejected} tone="weak" icon={WarningCircle} />
       </div>
 
       {state === 'running' && (

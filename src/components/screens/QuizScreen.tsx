@@ -18,7 +18,7 @@ function QuestionCard({ question, selected, onSelect, onNext, isLast }: Question
   const [sourceOpen, setSourceOpen] = useState(false)
 
   return (
-    <div className="rounded-sm border border-border bg-surface p-6">
+    <div className="card-lift rounded-sm border border-border bg-surface p-6">
       <p className="text-caption text-text-secondary">{question.topic}</p>
       <h2 className="mt-1 text-h2 font-semibold text-text-primary">{question.prompt}</h2>
 
@@ -105,6 +105,7 @@ export function QuizScreen({ onComplete }: QuizScreenProps) {
   const question = mockQuiz[currentIndex]
   const isLast = currentIndex === mockQuiz.length - 1
   const answeredCount = Object.keys(answers).length
+  const percentComplete = Math.round((answeredCount / mockQuiz.length) * 100)
 
   return (
     <div className="max-w-2xl">
@@ -113,11 +114,12 @@ export function QuizScreen({ onComplete }: QuizScreenProps) {
           <span>
             Question {currentIndex + 1} of {mockQuiz.length}
           </span>
+          <span className="tabular-nums">{percentComplete}% complete</span>
         </div>
         <div className="h-1.5 overflow-hidden rounded-sm bg-border">
           <div
             className="h-full bg-primary transition-[width] duration-300 ease-out"
-            style={{ width: `${(answeredCount / mockQuiz.length) * 100}%` }}
+            style={{ width: `${percentComplete}%` }}
           />
         </div>
       </div>
