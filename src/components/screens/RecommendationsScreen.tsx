@@ -52,7 +52,10 @@ export function RecommendationsScreen({ onRestart }: RecommendationsScreenProps)
           const isLead = i === 0
 
           return (
-            <div key={course.title} className={`bg-surface ${isLead ? 'p-6' : 'p-4'}`}>
+            <div
+              key={course.title}
+              className={`bg-surface transition-colors hover:bg-surface-alt ${isLead ? 'p-6' : 'p-4'}`}
+            >
               <div className="flex items-start gap-4">
                 <span
                   className={`flex shrink-0 items-center justify-center rounded-sm font-semibold tabular-nums ${

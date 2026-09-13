@@ -28,11 +28,13 @@ export function OfficersScreen() {
 
       <div className="mt-6 overflow-hidden rounded-sm border border-border">
         <div className="grid grid-cols-[1fr_140px] border-b border-border bg-surface-alt">
-          <span className="px-4 py-3 text-h3 font-semibold text-text-primary">Officer</span>
+          <span className="px-4 py-3 text-h3 font-semibold uppercase tracking-wide text-text-primary">
+            Officer
+          </span>
           <button
             type="button"
             onClick={() => setAscending((v) => !v)}
-            className="flex items-center justify-end gap-1 px-4 py-3 text-right text-h3 font-semibold text-text-primary transition-colors hover:bg-border/50"
+            className="flex items-center justify-end gap-1 px-4 py-3 text-right text-h3 font-semibold uppercase tracking-wide text-text-primary transition-colors hover:bg-border/50"
           >
             Average score
             {ascending ? <CaretUp size={12} weight="bold" /> : <CaretDown size={12} weight="bold" />}
@@ -41,7 +43,7 @@ export function OfficersScreen() {
         {sorted.map((officer) => (
           <div
             key={officer.id}
-            className="grid grid-cols-[1fr_140px] border-b border-border bg-surface px-4 py-3 last:border-b-0"
+            className="grid grid-cols-[1fr_140px] border-b border-border bg-surface px-4 py-3 transition-colors last:border-b-0 hover:bg-surface-alt"
           >
             <span className="text-body text-text-primary">{officer.name}</span>
             <span className="text-right text-cell font-medium tabular-nums text-text-primary">

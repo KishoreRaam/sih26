@@ -122,7 +122,7 @@ export function DashboardScreen({ onComplete }: DashboardScreenProps) {
                 key={dimension.id}
                 type="button"
                 onClick={() => setSortKey(dimension.id)}
-                className={`flex items-center justify-between gap-1 border-b border-l border-border px-3 py-3 text-left text-h3 font-semibold transition-colors ${
+                className={`flex items-center justify-between gap-1 border-b border-l border-border px-3 py-3 text-left text-h3 font-semibold uppercase tracking-wide transition-colors ${
                   active
                     ? 'bg-primary-tint text-primary'
                     : 'bg-surface-alt text-text-primary hover:bg-border/50'
@@ -181,7 +181,7 @@ export function DashboardScreen({ onComplete }: DashboardScreenProps) {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+      <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 rounded-sm border border-border bg-surface-alt px-4 py-3">
         {(['strong', 'moderate', 'weak'] as const).map((level) => (
           <div key={level} className="flex items-center gap-2">
             <span
