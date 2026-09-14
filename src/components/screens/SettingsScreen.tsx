@@ -42,7 +42,7 @@ export function SettingsScreen() {
       <div className="mt-5 border-t border-border pt-4">
         <p className="text-caption text-text-muted">Session</p>
         <div className="mt-1.5 flex items-center justify-between gap-3">
-          <span className="inline-flex w-fit items-center rounded-sm bg-primary-tint px-2 py-0.5 text-micro font-medium text-primary">
+          <span className="inline-flex w-fit items-center rounded-full bg-primary-tint px-2 py-0.5 text-micro font-medium text-primary">
             Coordinator (Admin)
           </span>
           <button

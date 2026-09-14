@@ -69,7 +69,7 @@ export function RecommendationsScreen({ onRestart }: RecommendationsScreenProps)
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex w-fit items-center rounded-sm bg-accent-tint px-2 py-0.5 text-micro font-medium text-accent">
+                    <span className="inline-flex w-fit items-center rounded-full bg-accent-tint px-2 py-0.5 text-micro font-medium text-accent">
                       {course.provider}
                     </span>
                     <span className="text-micro text-text-muted">{course.format}</span>
@@ -99,7 +99,7 @@ export function RecommendationsScreen({ onRestart }: RecommendationsScreenProps)
                       {officers.map((name) => (
                         <span
                           key={name}
-                          className="rounded-sm border border-border bg-surface-alt px-2 py-0.5 text-caption text-text-secondary"
+                          className="rounded-full border border-border bg-surface-alt px-2 py-0.5 text-caption text-text-secondary"
                         >
                           {name}
                         </span>

@@ -120,7 +120,7 @@ export function RejectionAuditBoard() {
                       <div className="mt-2 flex flex-wrap items-center gap-1.5">
                         {item.rejectionReason && (
                           <span
-                            className={`rounded-sm px-1.5 py-0.5 text-micro font-medium ${reasonTagClass[item.rejectionReason]}`}
+                            className={`rounded-full px-1.5 py-0.5 text-micro font-medium ${reasonTagClass[item.rejectionReason]}`}
                           >
                             {rejectionReasonLabels[item.rejectionReason]}
                           </span>

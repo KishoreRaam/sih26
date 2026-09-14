@@ -159,7 +159,7 @@ export function DashboardScreen({ onComplete }: DashboardScreenProps) {
                       className={`flex items-center justify-center border-b border-l px-3 py-3 ${levelCellClasses[cell.level]}`}
                     >
                       {cell.level === 'insufficient' ? (
-                        <span className="rounded-sm bg-insufficient-tint px-2 py-0.5 text-micro font-medium text-insufficient">
+                        <span className="rounded-full bg-insufficient-tint px-2 py-0.5 text-micro font-medium text-insufficient">
                           Insufficient data
                         </span>
                       ) : (

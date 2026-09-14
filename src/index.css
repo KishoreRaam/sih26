@@ -21,27 +21,27 @@
   --color-accent-tint: #f5ebd8;
 
   /* Neutrals */
-  --color-bg: #f6f7f9;
+  --color-bg: #f9fafb;
   --color-surface: #ffffff;
-  --color-surface-alt: #f0f2f5;
-  --color-border: #d9dfe5;
-  --color-border-strong: #b7c0c9;
-  --color-text-primary: #17232e;
-  --color-text-secondary: #56636e;
-  --color-text-muted: #8592a0;
+  --color-surface-alt: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-strong: #94a3b8;
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #1e293b;
+  --color-text-muted: #64748b;
 
-  /* Semantic: competency levels (never color-only in usage - pair with a label) */
-  --color-strong: #1f7a5c;
-  --color-strong-tint: #e1f1ea;
-  --color-moderate: #c98a1b;
-  --color-moderate-tint: #fbf0dc;
-  --color-weak: #b3452c;
-  --color-weak-tint: #f7e4dd;
-  --color-insufficient: #8c97a3;
-  --color-insufficient-tint: #edeff1;
+  /* Semantic: competency levels / status pills (never color-only in usage - pair with a label) */
+  --color-strong: #166534;
+  --color-strong-tint: #dcfce7;
+  --color-moderate: #92400e;
+  --color-moderate-tint: #fef3c7;
+  --color-weak: #991b1b;
+  --color-weak-tint: #fee2e2;
+  --color-insufficient: #475569;
+  --color-insufficient-tint: #f1f5f9;
 
   /* System (kept distinct from competency-weak on purpose) */
-  --color-system-error: #c0392b;
+  --color-system-error: #991b1b;
   --color-focus-ring: #a66a00;
 
   /* Type: Noto Sans only for this mock (bilingual-ready stack kept for production) */
