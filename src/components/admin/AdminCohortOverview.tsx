@@ -1,4 +1,4 @@
-import { CalendarBlank, UsersThree } from '@phosphor-icons/react'
+import { CalendarBlank, CaretRight, UsersThree } from '@phosphor-icons/react'
 import { CURRENT_CYCLE_ID, domains, getOfficerDomainScore } from '../../data/competencyDomains'
 import {
   type DepartmentStatus,
@@ -33,7 +33,11 @@ function departmentDomainCells(departmentId: string) {
   })
 }
 
-export function AdminCohortOverview() {
+interface AdminCohortOverviewProps {
+  onSelectDepartment: (departmentId: string) => void
+}
+
+export function AdminCohortOverview({ onSelectDepartment }: AdminCohortOverviewProps) {
   return (
     <div>
       <p className="text-caption text-text-muted">{departments.length} departments</p>
@@ -93,6 +97,15 @@ export function AdminCohortOverview() {
                   })}
                 </span>
               </div>
+
+              <button
+                type="button"
+                onClick={() => onSelectDepartment(department.id)}
+                className="mt-4 flex w-full items-center justify-center gap-1.5 rounded-sm border border-border px-3 py-1.5 text-caption font-medium text-text-primary transition-colors hover:bg-surface-alt"
+              >
+                View officers
+                <CaretRight size={12} />
+              </button>
             </div>
           )
         })}
