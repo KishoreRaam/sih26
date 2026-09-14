@@ -37,6 +37,7 @@ export const navGroups: NavGroup[] = [
       },
       { id: 'officers', label: 'Officers' },
       { id: 'reports', label: 'Reports' },
+      { id: 'courseProgress', label: 'Course Progress' },
     ],
   },
   {
@@ -416,6 +417,10 @@ export const sectionCopy: Record<string, { title: string; subtitle: string }> = 
     title: 'Reports',
     subtitle: 'Competency reports generated for this cohort.',
   },
+  courseProgress: {
+    title: 'Course Progress',
+    subtitle: 'Every officer\'s assigned iGOT Karmayogi courses and completion status this cycle.',
+  },
   settings: {
     title: 'Settings',
     subtitle: 'Your NSSTA account details.',
@@ -431,6 +436,7 @@ export const breadcrumbBySection: Record<string, string[]> = {
   overview: ['Dashboard'],
   officers: ['Officers'],
   reports: ['Reports'],
+  courseProgress: ['Course Progress'],
   settings: ['Settings'],
   audit: ['Verification Audit'],
 }

@@ -4,6 +4,7 @@ import {
   CaretLineLeft,
   CaretLineRight,
   ChartBar,
+  ChartLineUp,
   ClipboardText,
   CloudArrowUp,
   FileText,
@@ -28,6 +29,7 @@ const iconByItemId: Record<string, Icon> = {
   recommendations: GraduationCap,
   officers: UsersThree,
   reports: FileText,
+  courseProgress: ChartLineUp,
   audit: MagnifyingGlass,
   settings: GearSix,
 }
