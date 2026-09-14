@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { clearRole } from '../../lib/session'
 import { FEATURED_OFFICER_ID, officers } from '../../data/officers'
 
-export type OfficerSection = 'dashboard' | 'courses'
+export type OfficerSection = 'dashboard' | 'courses' | 'connect'
 
 interface OfficerTopBarProps {
   activeSection: OfficerSection
@@ -13,6 +13,7 @@ interface OfficerTopBarProps {
 const officerSections: { id: OfficerSection; label: string }[] = [
   { id: 'dashboard', label: 'My Dashboard' },
   { id: 'courses', label: 'My Courses' },
+  { id: 'connect', label: 'Connect' },
 ]
 
 export function OfficerTopBar({ activeSection, onSelectSection }: OfficerTopBarProps) {
