@@ -55,7 +55,7 @@ export function AdminCohortOverview({ onSelectDepartment }: AdminCohortOverviewP
                   <p className="text-caption text-text-muted">{department.code}</p>
                   <h2 className="mt-0.5 text-h1 font-semibold text-text-primary">{department.name}</h2>
                 </div>
-                <span className={`shrink-0 rounded-sm px-2 py-0.5 text-micro font-medium ${statusClass[status]}`}>
+                <span className={`shrink-0 rounded-full px-2 py-0.5 text-micro font-medium ${statusClass[status]}`}>
                   {statusLabel[status]}
                 </span>
               </div>

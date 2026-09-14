@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { MagnifyingGlass, PaperPlaneTilt, X } from '@phosphor-icons/react'
 import { CURRENT_CYCLE_ID, getOfficerExpertise } from '../../data/competencyDomains'
+import { departments } from '../../data/departments'
 import { FEATURED_OFFICER_ID, officers } from '../../data/officers'
 
 interface Message {
@@ -177,7 +178,9 @@ export function OfficerConnect() {
                   </span>
                   <div className="min-w-0">
                     <p className="truncate text-body font-medium text-text-primary">{entryOfficer.name}</p>
-                    <p className="text-caption text-text-muted">{entryOfficer.departmentId.toUpperCase()}</p>
+                    <p className="text-caption text-text-muted">
+                      {departments.find((d) => d.id === entryOfficer.departmentId)?.code}
+                    </p>
                   </div>
                 </div>
                 <span

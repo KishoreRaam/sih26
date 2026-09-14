@@ -44,6 +44,7 @@ export function DiagnosticsApp() {
       goToDiagnostics(childId as Step)
     } else {
       setSection(id as Section)
+      if (id === 'overview') setOverviewView({ kind: 'departments' })
     }
   }
 
