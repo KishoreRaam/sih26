@@ -130,7 +130,7 @@ export function OfficerDashboard() {
               segments={domainScores.map((entry) => ({
                 id: entry.domain.id,
                 label: entry.domain.name,
-                value: entry.score ?? 0,
+                value: taxonomyCompetencies.filter((c) => c.domainId === entry.domain.id).length,
                 colorClass: domainColorClass[entry.domain.id],
               }))}
             />
