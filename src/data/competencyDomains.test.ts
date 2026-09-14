@@ -5,6 +5,7 @@ import {
   getOfficerAssessedCount,
   getOfficerDomainScore,
   getOfficerEngagement,
+  getOfficerExpertise,
   getOfficerOverallScore,
   getOfficerWeakestCompetencies,
   getPreviousCycleId,
@@ -120,5 +121,51 @@ describe('generated officers (deterministic, non-featured)', () => {
         }
       }
     }
+  })
+})
+
+describe('getOfficerEngagement (generated officers)', () => {
+  it("does not change the featured officer's existing hand-authored values", () => {
+    expect(getOfficerEngagement(FEATURED_OFFICER_ID, 'cycle-3')).toEqual({
+      learningHours: 14,
+      coursesCompleted: 2,
+    })
+    expect(getOfficerEngagement(FEATURED_OFFICER_ID, 'cycle-4')).toEqual({
+      learningHours: 22,
+      coursesCompleted: 4,
+    })
+  })
+
+  it('gives every other officer non-zero engagement at cycle-4, growing from cycle-3', () => {
+    officers
+      .filter((o) => o.id !== FEATURED_OFFICER_ID)
+      .forEach((officer) => {
+        const c3 = getOfficerEngagement(officer.id, 'cycle-3')
+        const c4 = getOfficerEngagement(officer.id, 'cycle-4')
+        expect(c4.learningHours).toBeGreaterThan(0)
+        expect(c4.learningHours).toBeGreaterThanOrEqual(c3.learningHours)
+        expect(c4.coursesCompleted).toBeGreaterThanOrEqual(c3.coursesCompleted)
+      })
+  })
+
+  it('is deterministic across repeated calls', () => {
+    const first = getOfficerEngagement('ananya-krishnan', 'cycle-4')
+    const second = getOfficerEngagement('ananya-krishnan', 'cycle-4')
+    expect(first).toEqual(second)
+  })
+})
+
+describe('getOfficerExpertise', () => {
+  it("returns the featured officer's strongest domain at cycle-4 (behavioural, from stakeholder_comm 79 / ethical_ai 64 averaging 72, the highest of the 4 domains)", () => {
+    const result = getOfficerExpertise(FEATURED_OFFICER_ID, 'cycle-4')
+    expect(result).not.toBeNull()
+    expect(result?.domain.id).toBe('behavioural')
+    expect(result?.score).toBe(72)
+  })
+
+  it('returns a non-null result for every officer at cycle-4', () => {
+    officers.forEach((officer) => {
+      expect(getOfficerExpertise(officer.id, 'cycle-4')).not.toBeNull()
+    })
   })
 })

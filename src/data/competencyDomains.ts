@@ -290,6 +290,21 @@ export function getOfficerWeakestCompetencies(
   return scored.sort((a, b) => a.score - b.score).slice(0, count)
 }
 
+function generateOfficerEngagement(
+  officerId: string,
+): Record<string, { learningHours: number; coursesCompleted: number }> {
+  const rand = mulberry32(hashString(`${officerId}:engagement`))
+  const cycle3Hours = Math.round(6 + rand() * 20)
+  const cycle3Courses = Math.round(rand() * 4)
+  const cycle4Hours = cycle3Hours + Math.round(4 + rand() * 14)
+  const cycle4Courses = cycle3Courses + Math.round(rand() * 3)
+
+  return {
+    'cycle-3': { learningHours: cycle3Hours, coursesCompleted: cycle3Courses },
+    'cycle-4': { learningHours: cycle4Hours, coursesCompleted: cycle4Courses },
+  }
+}
+
 const officerEngagement: Record<string, Record<string, { learningHours: number; coursesCompleted: number }>> = {
   [FEATURED_OFFICER_ID]: {
     'cycle-3': { learningHours: 14, coursesCompleted: 2 },
@@ -297,9 +312,29 @@ const officerEngagement: Record<string, Record<string, { learningHours: number; 
   },
 }
 
+for (const officer of officers) {
+  if (officer.id === FEATURED_OFFICER_ID) continue
+  officerEngagement[officer.id] = generateOfficerEngagement(officer.id)
+}
+
 export function getOfficerEngagement(
   officerId: string,
   cycleId: string,
 ): { learningHours: number; coursesCompleted: number } {
   return officerEngagement[officerId]?.[cycleId] ?? { learningHours: 0, coursesCompleted: 0 }
+}
+
+export interface OfficerExpertise {
+  domain: Domain
+  score: number
+}
+
+export function getOfficerExpertise(officerId: string, cycleId: string): OfficerExpertise | null {
+  const scored = domains
+    .map((domain) => ({ domain, ...getOfficerDomainScore(officerId, domain.id, cycleId) }))
+    .filter((entry): entry is { domain: Domain; score: number; confidence: 'scored' | 'partial' } => entry.score !== null)
+
+  if (scored.length === 0) return null
+
+  return scored.reduce((max, entry) => (entry.score > max.score ? entry : max), scored[0])
 }
