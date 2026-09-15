@@ -14,6 +14,7 @@ import {
   Sparkle,
   SquaresFour,
   Target,
+  TreeStructure,
   UsersThree,
 } from '@phosphor-icons/react'
 import type { Icon } from '@phosphor-icons/react'
@@ -21,6 +22,7 @@ import { navGroups } from '../../mockData'
 
 const iconByItemId: Record<string, Icon> = {
   overview: SquaresFour,
+  fracTaxonomy: TreeStructure,
   diagnostics: Target,
   upload: CloudArrowUp,
   generate: Sparkle,

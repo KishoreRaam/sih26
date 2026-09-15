@@ -2,7 +2,6 @@ import { Books, CaretLeft, ChartLineUp, CheckCircle, ClockCountdown } from '@pho
 import {
   assessmentCycles,
   CURRENT_CYCLE_ID,
-  type DomainId,
   domains,
   getOfficerAssessedCount,
   getOfficerDomainScore,
@@ -14,16 +13,10 @@ import {
 import { type AssignmentStatus, getOfficerCourseAssignments } from '../../data/courses'
 import { departments, getDepartmentAvgScore } from '../../data/departments'
 import { officers } from '../../data/officers'
+import { FRAC_DOMAIN_COLORS, FracTagBadge } from '../shared/FracTagBadge'
 import { SegmentedBar } from '../shared/SegmentedBar'
 import { StatCard } from '../shared/StatCard'
 import { TrendBarChart } from '../shared/TrendBarChart'
-
-const domainColorClass: Record<DomainId, string> = {
-  statistical: 'bg-primary',
-  technical: 'bg-secondary',
-  governance: 'bg-accent',
-  behavioural: 'bg-text-secondary',
-}
 
 const courseStatusMeta: Record<AssignmentStatus, { label: string; pillClass: string }> = {
   not_started: { label: 'Not Started', pillClass: 'bg-insufficient-tint text-insufficient' },
@@ -141,14 +134,14 @@ export function OfficerProfile({ officerId, onBack }: OfficerProfileProps) {
                 id: entry.domain.id,
                 label: entry.domain.name,
                 value: taxonomyCompetencies.filter((c) => c.domainId === entry.domain.id).length,
-                colorClass: domainColorClass[entry.domain.id],
+                colorClass: FRAC_DOMAIN_COLORS[entry.domain.id].bg,
               }))}
             />
           </div>
           <div className="mt-4 divide-y divide-border">
             {domainScores.map((entry) => (
               <div key={entry.domain.id} className="flex items-center justify-between gap-2 py-2">
-                <span className="text-body text-text-primary">{entry.domain.name}</span>
+                <FracTagBadge domain={entry.domain.id} />
                 {entry.confidence === 'insufficient' ? (
                   <span className="rounded-full border border-dashed border-insufficient bg-surface px-2 py-0.5 text-micro font-medium text-insufficient">
                     Insufficient data

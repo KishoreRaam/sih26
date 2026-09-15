@@ -24,6 +24,7 @@ export const navGroups: NavGroup[] = [
     label: 'Diagnostics',
     items: [
       { id: 'overview', label: 'Dashboard' },
+      { id: 'fracTaxonomy', label: 'FRAC Taxonomy' },
       {
         id: 'diagnostics',
         label: 'New Assessment',
@@ -409,6 +410,10 @@ export const sectionCopy: Record<string, { title: string; subtitle: string }> = 
     title: 'Dashboard',
     subtitle: 'Department-level competency progress across the organisation.',
   },
+  fracTaxonomy: {
+    title: 'FRAC Taxonomy',
+    subtitle: 'The DoPT FRAC competency framework this diagnostic assesses against, and how much of it is mapped so far.',
+  },
   officers: {
     title: 'Officers',
     subtitle: 'Officers in the current cohort and their overall competency score.',
@@ -434,6 +439,7 @@ export const sectionCopy: Record<string, { title: string; subtitle: string }> = 
 
 export const breadcrumbBySection: Record<string, string[]> = {
   overview: ['Dashboard'],
+  fracTaxonomy: ['FRAC Taxonomy'],
   officers: ['Officers'],
   reports: ['Reports'],
   courseProgress: ['Course Progress'],

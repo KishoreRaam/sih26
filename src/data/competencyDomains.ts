@@ -11,12 +11,12 @@ export interface Domain {
 export const domains: Domain[] = [
   {
     id: 'statistical',
-    name: 'Statistical Competency',
+    name: 'Statistical Competencies',
     description: 'Core survey, sampling, and estimation methodology.',
   },
   {
     id: 'technical',
-    name: 'Technical & AI Competency',
+    name: 'Technical Competencies',
     description: 'Applied AI/ML tooling and data automation skills.',
   },
   {
@@ -26,7 +26,7 @@ export const domains: Domain[] = [
   },
   {
     id: 'behavioural',
-    name: 'Behavioural Competency',
+    name: 'Behavioural and Managerial Competencies',
     description: 'Communication, ethics, and judgement in applying AI to official statistics.',
   },
 ]
@@ -234,6 +234,28 @@ export function getOfficerAssessedCount(officerId: string, cycleId: string): num
 
 export function isOfficerFullyAssessed(officerId: string, cycleId: string): boolean {
   return getOfficerAssessedCount(officerId, cycleId) === taxonomyCompetencies.length
+}
+
+export function getCompetencyAssessedCount(competencyId: string, cycleId: string): number {
+  return officers.filter((officer) => getRawScore(officer.id, cycleId, competencyId).confidence === 'scored').length
+}
+
+export interface CompetencyScoreSummary {
+  score: number | null
+  lower: number | null
+  upper: number | null
+}
+
+export function getCompetencyScoreSummary(competencyId: string, cycleId: string): CompetencyScoreSummary {
+  const scores = officers
+    .map((officer) => getRawScore(officer.id, cycleId, competencyId))
+    .filter((entry): entry is { score: number; confidence: 'scored' } => entry.confidence === 'scored' && entry.score !== null)
+    .map((entry) => entry.score)
+
+  if (scores.length === 0) return { score: null, lower: null, upper: null }
+
+  const avg = Math.round(scores.reduce((sum, s) => sum + s, 0) / scores.length)
+  return { score: avg, lower: Math.min(...scores), upper: Math.max(...scores) }
 }
 
 export interface DomainScoreSummary {

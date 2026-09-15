@@ -6,6 +6,7 @@ import { DepartmentOfficerList } from '../components/admin/DepartmentOfficerList
 import { OfficerProfile } from '../components/admin/OfficerProfile'
 import { RejectionAuditBoard } from '../components/admin/RejectionAuditBoard'
 import { DashboardScreen } from '../components/screens/DashboardScreen'
+import { FracTaxonomyExplorer } from '../components/screens/FracTaxonomyExplorer'
 import { GenerateScreen } from '../components/screens/GenerateScreen'
 import { OfficersScreen } from '../components/screens/OfficersScreen'
 import { QuizScreen } from '../components/screens/QuizScreen'
@@ -22,7 +23,15 @@ import {
   type Step,
 } from '../mockData'
 
-type Section = 'overview' | 'diagnostics' | 'officers' | 'reports' | 'settings' | 'audit' | 'courseProgress'
+type Section =
+  | 'overview'
+  | 'fracTaxonomy'
+  | 'diagnostics'
+  | 'officers'
+  | 'reports'
+  | 'settings'
+  | 'audit'
+  | 'courseProgress'
 
 type OverviewView =
   | { kind: 'departments' }
@@ -85,6 +94,7 @@ export function DiagnosticsApp() {
             }}
           />
         )}
+        {section === 'fracTaxonomy' && <FracTaxonomyExplorer />}
         {section === 'officers' && <OfficersScreen />}
         {section === 'reports' && (
           <ReportsScreen onViewReport={() => goToDiagnostics('dashboard')} />

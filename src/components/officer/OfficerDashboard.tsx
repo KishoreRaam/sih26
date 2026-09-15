@@ -2,7 +2,6 @@ import { Books, ChartLineUp, CheckCircle, ClockCountdown } from '@phosphor-icons
 import {
   assessmentCycles,
   CURRENT_CYCLE_ID,
-  type DomainId,
   domains,
   getOfficerAssessedCount,
   getOfficerDomainScore,
@@ -16,16 +15,10 @@ import {
 import { getOfficerCourseAssignments, type CourseAssignmentDetail } from '../../data/courses'
 import { getDepartmentAssessedFraction, getDepartmentAvgScore, departments } from '../../data/departments'
 import { FEATURED_OFFICER_ID, officers, type Officer } from '../../data/officers'
+import { FRAC_DOMAIN_COLORS, FracTagBadge } from '../shared/FracTagBadge'
 import { SegmentedBar } from '../shared/SegmentedBar'
 import { StatCard } from '../shared/StatCard'
 import { TrendBarChart } from '../shared/TrendBarChart'
-
-const domainColorClass: Record<DomainId, string> = {
-  statistical: 'bg-primary',
-  technical: 'bg-secondary',
-  governance: 'bg-accent',
-  behavioural: 'bg-text-secondary',
-}
 
 const courseSummaryPriority: Record<CourseAssignmentDetail['status'], number> = {
   in_progress: 0,
@@ -173,7 +166,7 @@ export function OfficerDashboard({ onNavigate }: OfficerDashboardProps) {
                 id: entry.domain.id,
                 label: entry.domain.name,
                 value: taxonomyCompetencies.filter((c) => c.domainId === entry.domain.id).length,
-                colorClass: domainColorClass[entry.domain.id],
+                colorClass: FRAC_DOMAIN_COLORS[entry.domain.id].bg,
               }))}
             />
           </div>
@@ -181,7 +174,7 @@ export function OfficerDashboard({ onNavigate }: OfficerDashboardProps) {
           <div className="mt-4 divide-y divide-border">
             {domainScores.map((entry) => (
               <div key={entry.domain.id} className="flex items-center justify-between gap-2 py-2">
-                <span className="text-body text-text-primary">{entry.domain.name}</span>
+                <FracTagBadge domain={entry.domain.id} />
                 {entry.confidence === 'insufficient' ? (
                   <span className="rounded-full border border-dashed border-insufficient bg-surface px-2 py-0.5 text-micro font-medium text-insufficient">
                     Insufficient data
